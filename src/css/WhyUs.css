@@ -1,0 +1,45 @@
+.why-us-section {
+    width: 100%;
+    padding: 70px 25px;
+}
+
+.why-us-div {
+    width: 100%;
+    opacity: 0;
+    transform: translateX(-25px);
+}
+
+.why-us-div.show-element {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 500ms;
+}
+
+.why-us-div.show-element .why-us-p {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 500ms;
+}
+
+.why-us-h2 {
+    font-size: 2rem;
+    text-align: center;
+    word-break: break-word;
+}
+
+.why-us-p {
+    font-size: 1.1rem;
+    text-align: justify;
+    word-break: break-word;
+    line-height: 1.4;
+    margin-top: 30px;
+    opacity: 0;
+    transform: translateX(-25px);
+}
+
+.why-us-p::first-letter {
+    initial-letter: 2;
+    -webkit-initial-letter: 2;
+    font-weight: 400;
+    margin-right: 0.5rem;
+}

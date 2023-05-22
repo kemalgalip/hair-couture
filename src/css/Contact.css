@@ -1,0 +1,200 @@
+.contact-section {
+    width: 100%;
+    padding: 70px 25px;
+}
+
+.contact-div {
+    background-color: var(--MAIN-LIGHT-EFFECT-COLOR);
+    border: 1px solid var(--MAIN-DARK-COLOR);
+    width: 100%;
+    padding: 25px;
+    opacity: 0;
+    transform: translateX(-25px);
+}
+
+.contact-div.show-element {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 500ms;
+}
+
+.contact-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contact-h2 {
+    font-size: 2rem;
+    word-break: break-word;
+    margin-right: 10px;
+}
+
+.contact-location {
+    width: 38px;
+    height: 38px;
+}
+
+.contact-location-a:hover .contact-location,
+.contact-location-a:focus-visible .contact-location {
+    animation: locationIcon 450ms;
+}
+
+.contact-address-div {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.contact-address-div > h4 {
+    font-size: 1.2rem;
+    word-break: break-word;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--MAIN-DARK-COLOR);
+}
+
+.contact-address-div > p {
+    font-size: 1.1rem;
+    word-break: break-word;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--MAIN-DARK-COLOR);
+}
+
+.contact-form-h3 {
+    font-size: 1.6rem;
+    word-break: break-word;
+    margin-top: 30px;
+}
+
+.contact-form {
+    font-size: 0;
+    margin-top: 22px;
+}
+
+.contact-form-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 12px;
+}
+
+.contact-form-input,
+.contact-form-textarea {
+    font-size: 1.1rem;
+    letter-spacing: -0.5px;
+    width: 100%;
+    background-color: var(--MAIN-LIGHT-COLOR);
+    padding: 6px 8px;
+    border: 1px solid var(--MAIN-DARK-COLOR);
+}
+
+.contact-form-textarea {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--MAIN-DARK-COLOR);
+    margin-top: 12px;
+    resize: none;
+}
+
+.contact-form-button-grid {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.contact-form-button {
+    font-size: 1.1rem;
+    color: var(--MAIN-DARK-COLOR);
+    background: linear-gradient(to bottom, var(--MAIN-LIGHT-COLOR) 50%, var(--MAIN-DARK-COLOR) 50%) top;
+    background-size: 100% 200%;
+    padding: 6px 8px;
+    border: 1px solid var(--MAIN-DARK-COLOR);
+    grid-column-end: -1;
+    transition: all 100ms, width 0ms, height 0ms;
+    cursor: pointer;
+}
+
+.contact-form-button:hover,
+.contact-form-button:focus-visible {
+    color: var(--MAIN-LIGHT-COLOR);
+    background-position: bottom;
+}
+
+.div-contact-form-success {
+    margin-top: 35px;
+}
+
+.contact-form-success {
+    width: 85px;
+    height: 85px;
+    margin: 10px auto;
+    display: block;
+    pointer-events: none;
+}
+
+.contact-form-success-p {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+@keyframes locationIcon {
+    33% {
+        transform: rotate(6deg);
+    }
+    50% {
+        transform: translateY(3px);
+    }
+    66% {
+        transform: rotate(-6deg);
+    }
+    100% {
+        transform: rotate(0);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .contact-form-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .contact-form-button-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .contact-form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .contact-form-button-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .contact-form-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .contact-form-button-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .contact-address-div {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 5px;
+    }
+
+    .contact-address-div > h4 {
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .contact-address-div > p {
+        padding-bottom: 5px;
+    }
+}

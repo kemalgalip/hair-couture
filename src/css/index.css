@@ -1,0 +1,56 @@
+:root {
+  /* COLORS */
+  --MAIN-DARK-COLOR: black;
+  --MAIN-GRAY-COLOR: rgb(50, 50, 50);
+  --MAIN-LIGHT-COLOR: white;
+  --MAIN-THIRD-COLOR: red;
+  --MAIN-LIGHT-EFFECT-COLOR: hsl(0, 0%, 97%);
+}
+
+::-webkit-scrollbar {
+  background-color: var(--MAIN-LIGHT-COLOR);
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(0, 0%, 12%);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--MAIN-DARK-COLOR);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+/* || GENERAL STYLES */
+
+* {
+  font-family: 'Urbanist', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*:focus-visible {
+  outline: 1px solid var(--MAIN-THIRD-COLOR);
+  outline-offset: 1px;
+}
+
+/* || CLASSES */
+
+.body-container {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* || IDs */
+
+#root {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}

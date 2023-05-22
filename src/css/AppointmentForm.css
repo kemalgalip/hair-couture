@@ -1,0 +1,110 @@
+.appointment-section {
+    width: 100%;
+    padding: 70px 25px;
+}
+
+.appointment-div {
+    background-color: var(--MAIN-LIGHT-EFFECT-COLOR);
+    border: 1px solid var(--MAIN-DARK-COLOR);
+    width: 100%;
+    padding: 25px;
+    opacity: 0;
+    transform: translateX(-25px);
+}
+
+.appointment-div.show-element {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 500ms;
+}
+
+.appointment-form-h2 {
+    font-size: 1.7rem;
+    word-break: break-word;
+    color: var(--MAIN-DARK-COLOR);
+}
+
+.appointment-form {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 12px;
+}
+
+.appointment-form > * {
+    border: 1px solid var(--MAIN-DARK-COLOR);
+}
+
+.appointment-form-input {
+    font-size: 1.1rem;
+    letter-spacing: -0.5px;
+    width: 100%;
+    background-color: var(--MAIN-LIGHT-COLOR);
+    padding: 6px 8px;
+}
+
+.appointment-form-input::-webkit-scrollbar {
+    width: 6px;
+}
+
+.appointment-form-button {
+    font-size: 1.1rem;
+    color: var(--MAIN-DARK-COLOR);
+    background: linear-gradient(to bottom, var(--MAIN-LIGHT-COLOR) 50%, var(--MAIN-DARK-COLOR) 50%) top;
+    background-size: 100% 200%;
+    grid-column-end: -1;
+    transition: all 100ms;
+    cursor: pointer;
+}
+
+.appointment-form-button:hover,
+.appointment-form-button:focus-visible {
+    color: var(--MAIN-LIGHT-COLOR);
+    background-position: bottom;
+}
+
+.appointment-form-p {
+    font-size: 1rem;
+    word-break: break-word;
+    margin-top: 16px;
+}
+
+.appointment-form-success {
+    width: 85px;
+    height: 85px;
+    margin: 10px auto;
+    display: block;
+    pointer-events: none;
+}
+
+.appointment-form-success-p {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+    .appointment-form {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .appointment-form {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .appointment-form {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .appointment-form {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
