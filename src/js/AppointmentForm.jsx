@@ -8,10 +8,10 @@ export default function AppointmentForm(props) {
     const appointmentDivRef = React.useRef(null)
 
     const [appointmentForm, setAppointmentForm] = React.useState({
-        firstName: "",
-        lastName: "",
-        emailAddress: "",
-        phoneNumber: "",
+        firstName: "Kemal",
+        lastName: "Galip1",
+        emailAddress: "xyz@xyz.com",
+        phoneNumber: "555-55515555",
         date: "",
         hour: availableHours[0],
         service: servicesProvided[0]

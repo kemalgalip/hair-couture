@@ -8,11 +8,11 @@ export default function Contact(props) {
     const formTextareaRef = React.useRef(null)
 
     const [contactForm, setContactForm] = React.useState({
-        firstName: "",
-        lastName: "",
-        emailAddress: "",
-        phoneNumber: "",
-        message: ""
+        firstName: "Kemal",
+        lastName: "Galip1",
+        emailAddress: "xyz@xyz.com",
+        phoneNumber: "555-55515555",
+        message: "(Some inputs are filled purposefully wrong for testing. Click \"Send\" to test the form.)"
     })
 
     React.useEffect(() => {
@@ -95,12 +95,12 @@ export default function Contact(props) {
                         <h3 className="contact-form-h3">Do you have questions?</h3>
                         <form className="contact-form" onChange={handleContactFormChange} onSubmit={handleContactFormSubmit}>
                             <div className="contact-form-grid">
-                                <input className="contact-form-input" type="text" pattern="^\s*[a-zA-Z]+(?:\s+[a-zA-Z]+)*\s*$" id="firstName" name="firstName" value={contactForm.firstName} placeholder="First Name" required title="It should contain only letters and spaces" />
-                                <input className="contact-form-input" type="text" pattern="^\s*[a-zA-Z]+(?:\s+[a-zA-Z]+)*\s*$" id="lastName" name="lastName" value={contactForm.lastName} placeholder="Last Name" required title="It should contain only letters and spaces" />
-                                <input className="contact-form-input" type="email" id="emailAddress" name="emailAddress" value={contactForm.emailAddress} placeholder="E-Mail Address" required />
-                                <input className="contact-form-input" type="tel" pattern="^\s*[0-9]{3}[-. ]?[0-9]{3}[-. ]?[0-9]{4}\s*$" id="phoneNumber" name="phoneNumber" value={contactForm.phoneNumber} maxLength="12" placeholder="Phone" required title="(1234567890) or (123(-. )456(-. )7890)" />
+                                <input className="contact-form-input" type="text" pattern="^\s*[a-zA-Z]+(?:\s+[a-zA-Z]+)*\s*$" name="firstName" value={contactForm.firstName} placeholder="First Name" title="It should contain only letters and spaces" required />
+                                <input className="contact-form-input" type="text" pattern="^\s*[a-zA-Z]+(?:\s+[a-zA-Z]+)*\s*$" name="lastName" value={contactForm.lastName} placeholder="Last Name" title="It should contain only letters and spaces" required />
+                                <input className="contact-form-input" type="email" name="emailAddress" value={contactForm.emailAddress} placeholder="E-Mail Address" required />
+                                <input className="contact-form-input" type="tel" pattern="^\s*[0-9]{3}[-. ]?[0-9]{3}[-. ]?[0-9]{4}\s*$" name="phoneNumber" value={contactForm.phoneNumber} maxLength="12" placeholder="Phone" title="(1234567890) or (123(-. )456(-. )7890)" required />
                             </div>
-                            <textarea className="contact-form-textarea" ref={formTextareaRef} name="message" />
+                            <textarea className="contact-form-textarea" ref={formTextareaRef} name="message" value={contactForm.message} />
                             <div className="contact-form-button-grid">
                                 <button className="contact-form-button">Send</button>
                             </div>
