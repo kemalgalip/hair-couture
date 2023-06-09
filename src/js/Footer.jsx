@@ -25,6 +25,10 @@ export default function Footer() {
         }
     }, [newsletterFormSubmitted])
 
+    const date = new Date()
+
+    const year = date.getFullYear()
+
     return(
         <footer>
             <div className="footer-content-div">
@@ -54,6 +58,7 @@ export default function Footer() {
                 </div>
                 <a href="/" className="footer-logo-a"><img className="footer-logo" src={logoDark} width="540" height="242" /></a>
             </div>
+            <p>Hair Couture &copy; {year}</p>
         </footer>
     )
 }
