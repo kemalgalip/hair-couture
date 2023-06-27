@@ -1,25 +1,24 @@
-import React from "react"
-import "../css/About.css"
+import React from "react";
 
 export default function About() {
-    const aboutDivRef = React.useRef(null)
+    const aboutDivRef = React.useRef(null);
 
     React.useEffect(() => {
         if (aboutDivRef.current) {
             const observer = new IntersectionObserver(
                 ([entry]) => {
                     if (entry.isIntersecting) {
-                        aboutDivRef.current.classList.add("show-element")
+                        aboutDivRef.current.classList.add("show-element");
                     }
                 },
                 { rootMargin: "0px 0px -100px 0px" }
-            )
+            );
 
-            observer.observe(aboutDivRef.current)
+            observer.observe(aboutDivRef.current);
 
-            return () => observer.unobserve(aboutDivRef.current)
+            return () => observer.unobserve(aboutDivRef.current);
         }
-    }, [aboutDivRef.current])
+    }, [aboutDivRef.current]);
 
     return (
         <section className="about-section">
@@ -51,5 +50,5 @@ export default function About() {
                 </p>
             </div>
         </section>
-    )
+    );
 }

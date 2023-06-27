@@ -1,25 +1,24 @@
-import React from "react"
-import "../css/Mission.css"
+import React from "react";
 
 export default function Mission() {
-    const missionDivRef = React.useRef(null)
+    const missionDivRef = React.useRef(null);
 
     React.useEffect(() => {
         if (missionDivRef.current) {
             const observer = new IntersectionObserver(
                 ([entry]) => {
                     if (entry.isIntersecting) {
-                        missionDivRef.current.classList.add("show-element")
+                        missionDivRef.current.classList.add("show-element");
                     }
                 },
                 { rootMargin: "0px 0px -100px 0px" }
-            )
+            );
 
-            observer.observe(missionDivRef.current)
+            observer.observe(missionDivRef.current);
 
-            return () => observer.unobserve(missionDivRef.current)
+            return () => observer.unobserve(missionDivRef.current);
         }
-    }, [missionDivRef.current])
+    }, [missionDivRef.current]);
     return (
         <section className="mission-section">
             <div className="mission-div" ref={missionDivRef}>
@@ -44,5 +43,5 @@ export default function Mission() {
                 </p>
             </div>
         </section>
-    )
+    );
 }
