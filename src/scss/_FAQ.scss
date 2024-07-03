@@ -73,16 +73,27 @@
                 animation: faqBoxArrow 100ms;
             }
         }
+
+        .faq-box-answer {
+            grid-template-rows: 1fr;
+
+            > p {
+                margin-top: 0.5rem;
+            }
+        }
     }
 }
 
 .faq-box-answer {
-    overflow: hidden;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: all 150ms;
 
     > p {
         font-size: 1rem;
         word-break: break-word;
         transition: all 100ms;
+        overflow: hidden;
     }
 }
 

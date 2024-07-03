@@ -9,28 +9,6 @@ export default function FAQ() {
     const [activeBox, setActiveBox] = React.useState(null);
 
     const faqListMapped = faqList.map((faq, idx) => {
-        const faqPRef = React.useRef(null);
-
-        const [faqPHeight, setFaqPHeight] = React.useState(null);
-
-        React.useLayoutEffect(() => {
-            if (faqPRef.current) {
-                setFaqPHeight(faqPRef.current.offsetHeight);
-            }
-        }, [faqPRef.current]);
-
-        React.useLayoutEffect(() => {
-            function updateFaqPHeight() {
-                if (faqPRef.current) {
-                    setFaqPHeight(faqPRef.current.offsetHeight);
-                }
-            }
-
-            window.addEventListener("resize", updateFaqPHeight);
-
-            return () => window.removeEventListener("resize", updateFaqPHeight);
-        }, []);
-
         return (
             <div
                 key={idx}
@@ -49,9 +27,7 @@ export default function FAQ() {
                     <img className="faq-box-arrow" src={arrowRight} alt="Arrow" width="20" height="20" />
                 </div>
                 <div className="faq-box-answer">
-                    <p ref={faqPRef} style={{ marginTop: activeBox === idx ? "10px" : `-${faqPHeight + 1}px` }}>
-                        {faq.answer}
-                    </p>
+                    <p>{faq.answer}</p>
                 </div>
             </div>
         );
