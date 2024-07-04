@@ -1,10 +1,14 @@
 import React from "react";
+import { useInView } from "react-intersection-observer";
 import { availableHours } from "./availableHours";
-import { servicesProvided } from "./servicesProvided";
+import servicesProvided from "./servicesProvided";
 import successIcon from "../img/svgs/success-icon.svg";
 
 export default function AppointmentForm(props) {
-    const appointmentDivRef = React.useRef(null);
+    const { ref: appointmentDivRef, inView } = useInView({
+        triggerOnce: true,
+        rootMargin: "0px 0px -100px 0px",
+    });
 
     const [appointmentForm, setAppointmentForm] = React.useState({
         firstName: "Kemal",
@@ -41,7 +45,12 @@ export default function AppointmentForm(props) {
 
     function handleAppointmentFormSubmit(e) {
         e.preventDefault();
-        setAppointmentForm((prevForm) => ({ ...prevForm, firstName: appointmentForm.firstName.trim().replace(/\s{2,}/g, " "), lastName: appointmentForm.lastName.trim().replace(/\s{2,}/g, " "), phoneNumber: appointmentForm.phoneNumber.replace(/[-. ]/g, "") }));
+        setAppointmentForm((prevForm) => ({
+            ...prevForm,
+            firstName: appointmentForm.firstName.trim().replace(/\s{2,}/g, " "),
+            lastName: appointmentForm.lastName.trim().replace(/\s{2,}/g, " "),
+            phoneNumber: appointmentForm.phoneNumber.replace(/[-. ]/g, ""),
+        }));
         props.appointmentFormSubmittedFunction();
     }
 
@@ -51,26 +60,9 @@ export default function AppointmentForm(props) {
         }
     }, [props.isAppointmentFormSubmitted]);
 
-    React.useEffect(() => {
-        if (appointmentDivRef.current) {
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting) {
-                        appointmentDivRef.current.classList.add("show-element");
-                    }
-                },
-                { rootMargin: "0px 0px -100px 0px" }
-            );
-
-            observer.observe(appointmentDivRef.current);
-
-            return () => observer.unobserve(appointmentDivRef.current);
-        }
-    }, [appointmentDivRef.current]);
-
     return (
         <section className="appointment-section" ref={props.appointmentSectionRef}>
-            <div className="appointment-div" ref={appointmentDivRef}>
+            <div ref={appointmentDivRef} className={`appointment-div ${inView && "show-element"}`}>
                 {props.isAppointmentFormSubmitted ? (
                     <div className="div-appointment-form-success">
                         <img src={successIcon} alt="Success" />
@@ -80,10 +72,38 @@ export default function AppointmentForm(props) {
                     <div className="div-appointment-form-form">
                         <h2>Request an appointment</h2>
                         <form onChange={handleAppointmentFormChange} onSubmit={handleAppointmentFormSubmit}>
-                            <input type="text" pattern="^\s*[a-zA-Z]+(?:\s+[a-zA-Z]+)*\s*$" id="firstName" name="firstName" value={appointmentForm.firstName} placeholder="First Name" required title="It should contain only letters and spaces" />
-                            <input type="text" pattern="^\s*[a-zA-Z]+(?:\s+[a-zA-Z]+)*\s*$" id="lastName" name="lastName" value={appointmentForm.lastName} placeholder="Last Name" required title="It should contain only letters and spaces" />
+                            <input
+                                type="text"
+                                pattern="^\s*[a-zA-Z]+(?:\s+[a-zA-Z]+)*\s*$"
+                                id="firstName"
+                                name="firstName"
+                                value={appointmentForm.firstName}
+                                placeholder="First Name"
+                                required
+                                title="It should contain only letters and spaces"
+                            />
+                            <input
+                                type="text"
+                                pattern="^\s*[a-zA-Z]+(?:\s+[a-zA-Z]+)*\s*$"
+                                id="lastName"
+                                name="lastName"
+                                value={appointmentForm.lastName}
+                                placeholder="Last Name"
+                                required
+                                title="It should contain only letters and spaces"
+                            />
                             <input type="email" id="emailAddress" name="emailAddress" value={appointmentForm.emailAddress} placeholder="E-Mail Address" required />
-                            <input type="tel" pattern="^\s*[0-9]{3}[-. ]?[0-9]{3}[-. ]?[0-9]{4}\s*$" id="phoneNumber" name="phoneNumber" value={appointmentForm.phoneNumber} maxLength="12" placeholder="Phone" required title="(1234567890) or (123(-. )456(-. )7890)" />
+                            <input
+                                type="tel"
+                                pattern="^\s*[0-9]{3}[-. ]?[0-9]{3}[-. ]?[0-9]{4}\s*$"
+                                id="phoneNumber"
+                                name="phoneNumber"
+                                value={appointmentForm.phoneNumber}
+                                maxLength="12"
+                                placeholder="Phone"
+                                required
+                                title="(1234567890) or (123(-. )456(-. )7890)"
+                            />
                             <input type="date" id="date" name="date" value={appointmentForm.date} min={minDate} max={maxDate} required />
                             <select id="hour" name="hour" value={appointmentForm.hour} required>
                                 {availableHoursOptions}

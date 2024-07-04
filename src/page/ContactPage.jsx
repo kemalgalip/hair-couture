@@ -52,7 +52,11 @@ export default function ContactPage() {
                 <Contact isContactFormSubmitted={isContactFormSubmitted} contactFormSubmittedFunction={contactFormSubmittedFunction} />
                 <FAQ />
                 <WhyUs />
-                <AppointmentForm appointmentSectionRef={appointmentSectionRef} isAppointmentFormSubmitted={isAppointmentFormSubmitted} appointmentFormSubmittedFunction={appointmentFormSubmittedFunction} />
+                <AppointmentForm
+                    appointmentSectionRef={appointmentSectionRef}
+                    isAppointmentFormSubmitted={isAppointmentFormSubmitted}
+                    appointmentFormSubmittedFunction={appointmentFormSubmittedFunction}
+                />
                 <Brief />
             </section>
             <Footer />

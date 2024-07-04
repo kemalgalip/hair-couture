@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logoDark from "../img/hair-couture-logo-dark.png";
 
 export default function Footer() {
@@ -33,10 +34,10 @@ export default function Footer() {
             <div className="footer-content-div">
                 <div className="footer-pages-div">
                     <h3>Menu</h3>
-                    <a href="/">Home</a>
-                    <a href="/gallery">Gallery</a>
-                    <a href="/about">About</a>
-                    <a href="/contact">Contact</a>
+                    <Link to="/">Home</Link>
+                    <Link to="/gallery">Gallery</Link>
+                    <Link to="/about">About</Link>
+                    <Link to="/contact">Contact</Link>
                 </div>
                 <div className="footer-contact-div">
                     <h3>Contact</h3>
@@ -55,9 +56,9 @@ export default function Footer() {
                         </form>
                     )}
                 </div>
-                <a href="/" className="footer-logo-a">
+                <Link to="/" className="footer-logo-a">
                     <img src={logoDark} width="540" height="242" />
-                </a>
+                </Link>
             </div>
             <p>Hair Couture &copy; {year}</p>
         </footer>

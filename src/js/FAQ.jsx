@@ -1,36 +1,16 @@
 import React from "react";
-import { faqList } from "./faqList";
+import { useInView } from "react-intersection-observer";
+import faqList from "./faqList";
 import arrowRight from "../img/svgs/arrow-chevron-right.svg";
 
 export default function FAQ() {
-    const faqDivRef = React.useRef(null);
     const faqQuestionsRef = React.useRef(null);
 
     const [activeBox, setActiveBox] = React.useState(null);
 
-    const faqListMapped = faqList.map((faq, idx) => {
-        return (
-            <div
-                key={idx}
-                className={activeBox === idx ? "faq-box active" : "faq-box"}
-                style={{ "--order": idx + 1 }}
-                onClick={() => handleFaqClick(idx)}
-                onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                        handleFaqClick(idx);
-                    }
-                }}
-                tabIndex={0}
-            >
-                <div className="faq-box-row">
-                    <h3 className="faq-box-h3">{faq.question}</h3>
-                    <img className="faq-box-arrow" src={arrowRight} alt="Arrow" width="20" height="20" />
-                </div>
-                <div className="faq-box-answer">
-                    <p>{faq.answer}</p>
-                </div>
-            </div>
-        );
+    const { ref: faqDivRef, inView } = useInView({
+        triggerOnce: true,
+        rootMargin: "0px 0px -100px 0px",
     });
 
     React.useEffect(() => {
@@ -63,28 +43,36 @@ export default function FAQ() {
         }
     }
 
-    React.useEffect(() => {
-        if (faqDivRef.current) {
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting) {
-                        faqDivRef.current.classList.add("show-element");
-                    }
-                },
-                { rootMargin: "0px 0px -100px 0px" }
-            );
-
-            observer.observe(faqDivRef.current);
-
-            return () => observer.unobserve(faqDivRef.current);
-        }
-    }, [faqDivRef.current]);
-
     return (
         <section className="faq-section">
-            <div ref={faqDivRef}>
+            <div ref={faqDivRef} className={inView && "show-element"}>
                 <h2>FAQs</h2>
-                <div ref={faqQuestionsRef}>{faqListMapped}</div>
+                <div ref={faqQuestionsRef}>
+                    {faqList.map((faq, idx) => {
+                        return (
+                            <div
+                                key={idx}
+                                className={activeBox === idx ? "faq-box active" : "faq-box"}
+                                style={{ "--order": idx + 1 }}
+                                onClick={() => handleFaqClick(idx)}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                        handleFaqClick(idx);
+                                    }
+                                }}
+                                tabIndex={0}
+                            >
+                                <div className="faq-box-row">
+                                    <h3 className="faq-box-h3">{faq.question}</h3>
+                                    <img className="faq-box-arrow" src={arrowRight} alt="Arrow" width="20" height="20" />
+                                </div>
+                                <div className="faq-box-answer">
+                                    <p>{faq.answer}</p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
         </section>
     );

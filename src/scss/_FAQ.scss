@@ -87,7 +87,7 @@
 .faq-box-answer {
     display: grid;
     grid-template-rows: 0fr;
-    transition: all 150ms;
+    transition: all 150ms linear;
 
     > p {
         font-size: 1rem;

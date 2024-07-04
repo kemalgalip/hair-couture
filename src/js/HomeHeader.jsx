@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logoDark from "../img/hair-couture-logo-dark.png";
 import logoLight from "../img/hair-couture-logo-light.png";
 
@@ -36,15 +37,15 @@ export default function Header(props) {
 
     return (
         <header className="header-homepage" ref={props.homeHeaderRef}>
-            <a href="/">
+            <Link to="/">
                 <img src={isDarkLogo ? logoDark : logoLight} width="540" height="242" />
-            </a>
+            </Link>
             {windowWidth > 1024 ? (
                 <nav className="header-homepage-nav">
-                    <a href="/">Home</a>
-                    <a href="/gallery">Gallery</a>
-                    <a href="/about">About</a>
-                    <a href="/contact">Contact</a>
+                    <Link to="/">Home</Link>
+                    <Link to="/gallery">Gallery</Link>
+                    <Link to="/about">About</Link>
+                    <Link to="/contact">Contact</Link>
                 </nav>
             ) : (
                 <div className="header-homepage-menu-button" tabIndex={0}>
@@ -52,10 +53,10 @@ export default function Header(props) {
                     <div></div>
                     <div></div>
                     <nav className="header-homepage-dropdown-nav">
-                        <a href="/">Home</a>
-                        <a href="/gallery">Gallery</a>
-                        <a href="/about">About</a>
-                        <a href="/contact">Contact</a>
+                        <Link to="/">Home</Link>
+                        <Link to="/gallery">Gallery</Link>
+                        <Link to="/about">About</Link>
+                        <Link to="/contact">Contact</Link>
                     </nav>
                 </div>
             )}

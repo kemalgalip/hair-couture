@@ -1,8 +1,12 @@
 import React from "react";
+import { useInView } from "react-intersection-observer";
 import arrowDownwards from "../img/svgs/arrow-downward.svg";
 
 export default function Services(props) {
-    const servicesDivRef = React.useRef(null);
+    const { ref: servicesDivRef, inView } = useInView({
+        triggerOnce: true,
+        rootMargin: "0px 0px -100px 0px",
+    });
 
     function scrollToAppointment(e) {
         const appointmentPosition = props.appointmentSectionRef.current.getBoundingClientRect().top + window.scrollY;
@@ -10,26 +14,9 @@ export default function Services(props) {
         e.target.blur();
     }
 
-    React.useEffect(() => {
-        if (servicesDivRef.current) {
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting) {
-                        servicesDivRef.current.classList.add("show-element");
-                    }
-                },
-                { rootMargin: "0px 0px -100px 0px" }
-            );
-
-            observer.observe(servicesDivRef.current);
-
-            return () => observer.unobserve(servicesDivRef.current);
-        }
-    }, [servicesDivRef.current]);
-
     return (
         <section className="services-section">
-            <div ref={servicesDivRef}>
+            <div ref={servicesDivRef} className={inView && "show-element"}>
                 <h2>Hair Treatments and Services</h2>
                 <div>
                     <div className="services-card-outer" style={{ "--order": 1 }} tabIndex={0}>

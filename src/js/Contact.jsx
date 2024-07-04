@@ -1,9 +1,9 @@
 import React from "react";
+import { useInView } from "react-intersection-observer";
 import locationIcon from "../img/svgs/location-icon.svg";
 import successIcon from "../img/svgs/success-icon.svg";
 
 export default function Contact(props) {
-    const contactDivRef = React.useRef(null);
     const formTextareaRef = React.useRef(null);
 
     const [contactForm, setContactForm] = React.useState({
@@ -12,6 +12,11 @@ export default function Contact(props) {
         emailAddress: "xyz@xyz.com",
         phoneNumber: "555-55515555",
         message: 'Some inputs are filled purposefully wrong for testing. Click "Send" to test the form.',
+    });
+
+    const { ref: contactDivRef, inView } = useInView({
+        triggerOnce: true,
+        rootMargin: "0px 0px -100px 0px",
     });
 
     React.useEffect(() => {
@@ -39,7 +44,12 @@ export default function Contact(props) {
     function handleContactFormSubmit(e) {
         e.preventDefault();
         if (e.target.message.value.length >= 10) {
-            setContactForm((prevForm) => ({ ...prevForm, firstName: contactForm.firstName.trim().replace(/\s{2,}/g, " "), lastName: contactForm.lastName.trim().replace(/\s{2,}/g, " "), phoneNumber: contactForm.phoneNumber.replace(/[-. ]/g, "") }));
+            setContactForm((prevForm) => ({
+                ...prevForm,
+                firstName: contactForm.firstName.trim().replace(/\s{2,}/g, " "),
+                lastName: contactForm.lastName.trim().replace(/\s{2,}/g, " "),
+                phoneNumber: contactForm.phoneNumber.replace(/[-. ]/g, ""),
+            }));
             props.contactFormSubmittedFunction();
         } else {
             alert("Message must be at least 10 characters long!");
@@ -52,29 +62,16 @@ export default function Contact(props) {
         }
     }, [props.isContactFormSubmitted]);
 
-    React.useEffect(() => {
-        if (contactDivRef.current) {
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting) {
-                        contactDivRef.current.classList.add("show-element");
-                    }
-                },
-                { rootMargin: "0px 0px -100px 0px" }
-            );
-
-            observer.observe(contactDivRef.current);
-
-            return () => observer.unobserve(contactDivRef.current);
-        }
-    }, [contactDivRef.current]);
-
     return (
         <section className="contact-section">
-            <div className="contact-div" ref={contactDivRef}>
+            <div ref={contactDivRef} className={`contact-div ${inView && "show-element"}`}>
                 <div className="contact-heading">
                     <h2>Contact</h2>
-                    <a title="See on Google Maps" href="https://www.google.com/maps/@40.747404,-73.9879892,3a,75y,297.15h,94.66t/data=!3m7!1e1!3m5!1sNn14lLoTHosz4cmepfMQjg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fpanoid%3DNn14lLoTHosz4cmepfMQjg%26cb_client%3Dmaps_sv.tactile.gps%26w%3D203%26h%3D100%26yaw%3D86.5599%26pitch%3D0%26thumbfov%3D100!7i16384!8i8192" target="_blank">
+                    <a
+                        title="See on Google Maps"
+                        href="https://www.google.com/maps/@40.747404,-73.9879892,3a,75y,297.15h,94.66t/data=!3m7!1e1!3m5!1sNn14lLoTHosz4cmepfMQjg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fpanoid%3DNn14lLoTHosz4cmepfMQjg%26cb_client%3Dmaps_sv.tactile.gps%26w%3D203%26h%3D100%26yaw%3D86.5599%26pitch%3D0%26thumbfov%3D100!7i16384!8i8192"
+                        target="_blank"
+                    >
                         <img src={locationIcon} alt="Location Icon" width="800" height="800" />
                     </a>
                 </div>
@@ -98,10 +95,35 @@ export default function Contact(props) {
                         <h3>Do you have questions?</h3>
                         <form className="contact-form" onChange={handleContactFormChange} onSubmit={handleContactFormSubmit}>
                             <div className="contact-form-grid">
-                                <input type="text" pattern="^\s*[a-zA-Z]+(?:\s+[a-zA-Z]+)*\s*$" name="firstName" value={contactForm.firstName} placeholder="First Name" title="It should contain only letters and spaces" required />
-                                <input type="text" pattern="^\s*[a-zA-Z]+(?:\s+[a-zA-Z]+)*\s*$" name="lastName" value={contactForm.lastName} placeholder="Last Name" title="It should contain only letters and spaces" required />
+                                <input
+                                    type="text"
+                                    pattern="^\s*[a-zA-Z]+(?:\s+[a-zA-Z]+)*\s*$"
+                                    name="firstName"
+                                    value={contactForm.firstName}
+                                    placeholder="First Name"
+                                    title="It should contain only letters and spaces"
+                                    required
+                                />
+                                <input
+                                    type="text"
+                                    pattern="^\s*[a-zA-Z]+(?:\s+[a-zA-Z]+)*\s*$"
+                                    name="lastName"
+                                    value={contactForm.lastName}
+                                    placeholder="Last Name"
+                                    title="It should contain only letters and spaces"
+                                    required
+                                />
                                 <input type="email" name="emailAddress" value={contactForm.emailAddress} placeholder="E-Mail Address" required />
-                                <input type="tel" pattern="^\s*[0-9]{3}[-. ]?[0-9]{3}[-. ]?[0-9]{4}\s*$" name="phoneNumber" value={contactForm.phoneNumber} maxLength="12" placeholder="Phone" title="(1234567890) or (123(-. )456(-. )7890)" required />
+                                <input
+                                    type="tel"
+                                    pattern="^\s*[0-9]{3}[-. ]?[0-9]{3}[-. ]?[0-9]{4}\s*$"
+                                    name="phoneNumber"
+                                    value={contactForm.phoneNumber}
+                                    maxLength="12"
+                                    placeholder="Phone"
+                                    title="(1234567890) or (123(-. )456(-. )7890)"
+                                    required
+                                />
                             </div>
                             <textarea className="contact-form-textarea" ref={formTextareaRef} name="message" value={contactForm.message} />
                             <div className="contact-form-button-grid">

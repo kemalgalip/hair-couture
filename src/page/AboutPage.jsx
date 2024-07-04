@@ -44,7 +44,11 @@ export default function AboutPage() {
                 <Services headerRef={headerRef} appointmentSectionRef={appointmentSectionRef} />
                 <Testimonials headerRef={headerRef} />
                 <FAQ />
-                <AppointmentForm appointmentSectionRef={appointmentSectionRef} isAppointmentFormSubmitted={isAppointmentFormSubmitted} appointmentFormSubmittedFunction={appointmentFormSubmittedFunction} />
+                <AppointmentForm
+                    appointmentSectionRef={appointmentSectionRef}
+                    isAppointmentFormSubmitted={isAppointmentFormSubmitted}
+                    appointmentFormSubmittedFunction={appointmentFormSubmittedFunction}
+                />
             </section>
             <Footer />
         </>
